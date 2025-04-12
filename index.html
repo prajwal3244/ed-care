@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riya's Personalized Learning Roadmap</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #3498db;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .roadmap-item {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .roadmap-item h3 {
+            margin-top: 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            height: 20px;
+            margin-top: 10px;
+        }
+
+        .progress {
+            background-color: #8fcc2e;
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        #assessment-section, #career-section, #roadmap-section, #progress-section, #suggestion-section {
+            display: none;
+        }
+        #assessment-section, #career-section, #roadmap-section, #progress-section, #suggestion-section {
+          max-width: 800px;
+          margin: 0 auto;
+        }
+        input, select, textarea, button{
+          margin-bottom: 10px;
+          padding: 8px;
+          width: 100%;
+          box-sizing: border-box;
+        }
+        button{
+          background-color: #3498db;
+          color: white;
+          border: none;
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Riya's Learning Roadmap</h1>
+    </header>
+
+    <main>
+        <div class="section" id="assessment-section">
+            <h2>Assess Your Skills, Riya</h2>
+            <p>Please answer the following questions to assess your current skills.</p>
+            <textarea id="skills" placeholder="List your current skills and experience, Riya."></textarea>
+            <button onclick="assessSkills()">Next</button>
+        </div>
+
+        <div class="section" id="career-section">
+            <h2>Choose Your Career Goal, Riya</h2>
+            <p>What career goal are you aiming for?</p>
+            <select id="career-goal">
+                <option value="software-developer">Software Developer</option>
+                <option value="data-scientist">Data Scientist</option>
+                <option value="web-developer">Web Developer</option>
+                <option value="data-analyst">Data Analyst</option>
+                <option value="machine-learning-engineer">Machine Learning Engineer</option>
+            </select>
+            <button onclick="generateRoadmap()">Generate Roadmap</button>
+        </div>
+
+        <div class="section" id="roadmap-section">
+            <h2>Your Personalized Learning Roadmap, Riya</h2>
+            <div id="roadmap-items"></div>
+        </div>
+
+        <div class="section" id="progress-section">
+            <h2>Progress Tracking, Riya</h2>
+            <div id="progress-items"></div>
+        </div>
+        <div class="section" id="suggestion-section">
+          <h2>Suggestions, Riya</h2>
+          <div id="suggestion-items"></div>
+        </div>
+
+    </main>
+    <script>
+        let userSkills = "";
+        let careerGoal = "";
+        let roadmap = [];
+        let progress = {};
+
+        function assessSkills() {
+            userSkills = document.getElementById("skills").value;
+            // Add logic to process uploaded files (portfolio, resume) if needed
+            document.getElementById("assessment-section").style.display = "none";
+            document.getElementById("career-section").style.display = "block";
+        }
+
+        function generateRoadmap() {
+            careerGoal = document.getElementById("career-goal").value;
+            roadmap = generateLearningRoadmap(careerGoal, userSkills);
+            displayRoadmap(roadmap);
+            document.getElementById("career-section").style.display = "none";
+            document.getElementById("roadmap-section").style.display = "block";
+            document.getElementById("progress-section").style.display = "block";
+            document.getElementById("suggestion-section").style.display = "block";
+        }
+
+        function generateLearningRoadmap(goal, skills) {
+            // Example roadmap generation logic (replace with actual backend logic)
+            let roadmapData = [];
+
+            if (goal === "software-developer") {
+                roadmapData = [
+                    { title: "Introduction to Programming (Python)", link: "https://www.youtube.com/watch?v=rfscVS0vtbw", type:"Youtube"},
+                    { title: "Object-Oriented Programming", link: "https://www.coursera.org/specializations/object-oriented-programming", type:"Coursera"},
+                    { title: "Data Structures and Algorithms", link: "https://www.edx.org/course/data-structures-fundamentals", type:"edX"},
+                    { title: "Software Development Best Practices", link: "https://youtu.be/suATPK45sjk?si=8x5YhjNw6dMhfsgL", type:"Youtube"},
+                ];
+            } else if (goal === "data-scientist") {
+                roadmapData = [
+                    { title: "Introduction to Python for Data Science", link: "https://youtu.be/T5pRlIbr6gg?si=0LUy1P5NqOKVGYXG", type:"Youtube"},
+                    { title: "Statistics and Probability", link: "https://www.coursera.org/specializations/statistics", type:"Coursera"},
+                    { title: "Machine Learning with Python", link: "https://youtu.be/7eh4d6sabA0?si=bIsm8EUaE5uQyd46", type:"Youtube"},
+                    { title: "Data Visualization Techniques", link: "https://youtu.be/NOIfMY0KajE?si=I-V6Y8bJ1XARjnrN", type:"Youtube"},
+                ];
+            }
+            else if (goal === "web-developer"){
+              roadmapData = [
+                {title: "HTML and CSS Basics", link: "https://www.youtube.com/watch?v=UB1O30fR-EE", type:"Youtube"},
+                {title: "Javascript Fundamentals", link:"https://www.coursera.org/learn/javascript", type: "Coursera"},
+                {title: "Frontend Frameworks (React)", link: "https://youtu.be/5nUxK4QrUE4?si=zlVVhJWBjnfav-fu", type:"Youtube"},
+                {title: "Backend Development with Node.js", link: "https://youtu.be/EH3vGeqeIAo?si=IAPOXMlA-5NBun0G", type: "Youtube"}
+              ]
+            }
+            else if (goal === "data-analyst"){
+                roadmapData = [
+                  {title: "SQL for Data Analysis", link: "https://youtu.be/hlGoQC332VM?si=R0HdI1bhkfoVAL43s", type: "Youtube"},
+                  {title: "Data Analysis with Python", link: "https://www.coursera.org/specializations/data-science-python", type: "Coursera"},
+                  {title: "Data Visualization with Tableau", link: "https://www.youtube.com/live/_YWwU-gJI5U?si=UqH9B4rzsoZnqXcD", type: "Youtube"},
+                  {title: "Business Intelligence Concepts", link: "https://youtu.be/9VlvbpXwLJs?si=7KoS91gvwUscIDo0", type: "Youtube"}
+                ]
+            }
+            else if (goal === "machine-learning-engineer"){
+                roadmapData = [
+                  {title: "Linear Algebra and Calculus", link: "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D", type: "Youtube"},
+                  {title: "Machine Learning Fundamentals", link: "https://www.coursera.org/specializations/machine-learning-introduction", type:"Coursera"},
+                  {title: "Deep Learning with TensorFlow", link: "https://youtu.be/tPYj3fFJGjk?si=pXbx61uLSTs9gQXH", type: "Youtube"},
+                  {title: "MLOps and Deployment", link: "https://youtu.be/-dJPoLm_gtE?si=kefofy_foq78E89k", type: "Youtubess"}
+                ]
+            }
+            return roadmapData;
+        }
+
+        function displayRoadmap(roadmap) {
+            const roadmapItems = document.getElementById("roadmap-items");
+            roadmapItems.innerHTML = "";
+
+            roadmap.forEach((item, index) => {
+                const roadmapItem = document.createElement("div");
+                roadmapItem.classList.add("roadmap-item");
+                roadmapItem.innerHTML = `
+                    <h3>${item.title}</h3>
+                    <p><a href="${item.link}" target="_blank">${item.type} Link</a></p>
+                    <div class="progress-bar">
+                        <div class="progress" id="progress-${index}" style="width: 0%;"></div>
+                    </div>
+                    <button onclick="updateProgress(${index})">Mark Complete</button>
+                `;
+                roadmapItems.appendChild(roadmapItem);
+            });
+        }
+
+        function updateProgress(index) {
+            const progressElement = document.getElementById(`progress-${index}`);
+            progressElement.style.width = "100%";
+            progress[index] = true;
+            displayProgress();
+            displaySuggestions();
+        }
+
+        function displayProgress() {
+            const progressItems = document.getElementById("progress-items");
+            progressItems.innerHTML = "";
+            roadmap.forEach((item, index) => {
+                const progressItem = document.createElement("p");
+                progressItem.textContent = `${item.title}: ${progress[index] ? "Completed" : "In Progress"}`;
+                progressItems.appendChild(progressItem);
+            });
+        }
+        function displaySuggestions(){
+          const suggestionItems = document.getElementById("suggestion-items");
+          suggestionItems.innerHTML = "";
+          let suggestions = getSuggestions(progress, roadmap);
+          suggestions.forEach(suggestion => {
+            const suggestionItem = document.createElement("p");
+            suggestionItem.textContent = suggestion;
+            suggestionItems.appendChild(suggestionItem);
+          })
+        }
+        function getSuggestions(progress, roadmap){
+          let suggestions = [];
+          if(progress[0] && !progress[1] && roadmap[1]){
+            suggestions.push(`Riya, you completed ${roadmap[0].title}. Consider starting ${roadmap[1].title} next.`);
+          }
+          if(progress[1] && !progress[2] && roadmap[2]){
+            suggestions.push(`Riya, you finished ${roadmap[1].title}, ${roadmap[2].title} would be a great next step.`);
+          }
+           if (progress[2] && !progress[3] && roadmap[3]) {
+                suggestions.push(`Great job, Riya! You've finished ${roadmap[2].title}. Moving on to ${roadmap[3].title} will further your progress.`);
+            }
+          if (Object.values(progress).every(val => val === true)) {
+                suggestions.push("Riya, congratulations on completing your learning roadmap! Consider exploring advanced topics or applying your skills to a project.");
+            }
+          if (Object.values(progress).every(val => val === false)) {
+              suggestions.push("Riya, consider starting with the first step of your roadmap. Consistent effort will help you achieve your goals.");
+          }
+          return suggestions;
+        }
+        document.getElementById("assessment-section").style.display = "block";
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    width: 100%; /* Full width header */
+}
+
+section {
+    width: 80%; /* Adjusted width for better layout */
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center content within sections */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align form elements to the start */
+    margin-top: 10px;
+}
+
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: left;
+}
+
+form input[type="range"], form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    align-self: center; /* Center the button */
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+#roadmap-content, #progress-content {
+    margin-top: 20px;
+    text-align: left; /* Align roadmap and progress to the left */
+}
+
+h2 {
+    text-align: center; /* Center headings within sections */
+    margin-bottom: 20px;
+}
+
+/* Style for learning resources links */
+#roadmap-content ul li a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+#roadmap-content ul li a:hover {
+    text-decoration: underline;
+}
